@@ -19,7 +19,7 @@ namespace AppointmentScheduler.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Location> GetByIdAsync(int id)
+        public async Task<Location> GetByIdAsync(Guid id)
         {
             return await _context.Locations.FindAsync(id);
         }

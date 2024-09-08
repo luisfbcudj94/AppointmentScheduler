@@ -9,7 +9,7 @@ namespace AppointmentScheduler.Application.Services.Interfaces
 {
     public interface ILocationService
     {
-        Task<LocationDTO> GetByIdAsync(int id);
+        Task<LocationDTO> GetByIdAsync(Guid id);
         Task<IEnumerable<LocationDTO>> GetAllAsync();
     }
 }

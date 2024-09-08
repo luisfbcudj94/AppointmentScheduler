@@ -16,7 +16,7 @@ namespace AppointmentScheduler.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<LocationDTO>> Get(int id)
+        public async Task<ActionResult<LocationDTO>> Get(Guid id)
         {
             var location = await _locationService.GetByIdAsync(id);
             if (location == null) return NotFound();

@@ -9,7 +9,7 @@ namespace AppointmentScheduler.Infrastructure.Repositories.Interfaces
 {
     public interface ILocationRepository
     {
-        Task<Location> GetByIdAsync(int id);
+        Task<Location> GetByIdAsync(Guid id);
         Task<IEnumerable<Location>> GetAllAsync();
     }
 }

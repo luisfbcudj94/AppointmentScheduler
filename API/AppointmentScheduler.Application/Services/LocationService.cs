@@ -21,7 +21,7 @@ namespace AppointmentScheduler.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<LocationDTO> GetByIdAsync(int id)
+        public async Task<LocationDTO> GetByIdAsync(Guid id)
         {
             var location = await _locationRepository.GetByIdAsync(id);
             return _mapper.Map<LocationDTO>(location);

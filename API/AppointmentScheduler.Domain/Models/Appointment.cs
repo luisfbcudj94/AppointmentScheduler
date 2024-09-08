@@ -8,10 +8,10 @@ namespace AppointmentScheduler.Domain.Models
 {
     public class Appointment
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Cedula { get; set; }
         public DateTime AppointmentDate { get; set; }
-        public int LocationId { get; set; }
+        public Guid LocationId { get; set; }
         public Location Location { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }

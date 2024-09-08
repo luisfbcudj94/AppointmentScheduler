@@ -22,7 +22,7 @@ namespace AppointmentScheduler.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<AppointmentDTO> GetByIdAsync(int id)
+        public async Task<AppointmentDTO> GetByIdAsync(Guid id)
         {
             var appointment = await _appointmentRepository.GetByIdAsync(id);
             return _mapper.Map<AppointmentDTO>(appointment);
@@ -46,7 +46,7 @@ namespace AppointmentScheduler.Application.Services
             await _appointmentRepository.UpdateAsync(appointment);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             await _appointmentRepository.DeleteAsync(id);
         }

@@ -19,7 +19,7 @@ namespace AppointmentScheduler.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Appointment> GetByIdAsync(int id)
+        public async Task<Appointment> GetByIdAsync(Guid id)
         {
             return await _context.Appointments.FindAsync(id);
         }
@@ -41,7 +41,7 @@ namespace AppointmentScheduler.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var appointment = await GetByIdAsync(id);
             if (appointment != null)

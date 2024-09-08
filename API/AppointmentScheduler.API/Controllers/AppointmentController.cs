@@ -16,7 +16,7 @@ namespace AppointmentScheduler.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppointmentDTO>> Get(int id)
+        public async Task<ActionResult<AppointmentDTO>> Get(Guid id)
         {
             var appointment = await _appointmentService.GetByIdAsync(id);
             if (appointment == null) return NotFound();
@@ -38,7 +38,7 @@ namespace AppointmentScheduler.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AppointmentDTO appointmentDto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] AppointmentDTO appointmentDto)
         {
             if (id != appointmentDto.Id) return BadRequest();
             await _appointmentService.UpdateAsync(appointmentDto);
@@ -46,7 +46,7 @@ namespace AppointmentScheduler.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             await _appointmentService.DeleteAsync(id);
             return NoContent();

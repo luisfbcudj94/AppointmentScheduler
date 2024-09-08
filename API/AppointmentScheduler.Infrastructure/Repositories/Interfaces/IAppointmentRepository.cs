@@ -9,10 +9,10 @@ namespace AppointmentScheduler.Infrastructure.Repositories.Interfaces
 {
     public interface IAppointmentRepository
     {
-        Task<Appointment> GetByIdAsync(int id);
+        Task<Appointment> GetByIdAsync(Guid id);
         Task<IEnumerable<Appointment>> GetAllAsync();
         Task CreateAsync(Appointment appointment);
         Task UpdateAsync(Appointment appointment);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Guid id);
     }
 }
