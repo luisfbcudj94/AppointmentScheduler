@@ -14,5 +14,10 @@ namespace AppointmentScheduler.Infrastructure.Data
 
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Location> Locations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

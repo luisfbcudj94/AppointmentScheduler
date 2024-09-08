@@ -4,11 +4,16 @@ using AppointmentScheduler.Infrastructure.Data;
 using AppointmentScheduler.Infrastructure.Repositories.Interfaces;
 using AppointmentScheduler.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
+string sqlConnectionString = configuration.GetSection("SqlConnectionString")["default"];
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(sqlConnectionString,
+        sqlOptions => sqlOptions.MigrationsAssembly("AppointmentScheduler.Infrastructure")));
 
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
