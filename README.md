@@ -6,6 +6,9 @@
 
 This report details the implementation of the appointment scheduling system for an entity. The solution consists of a REST API developed in .NET and a web application in Angular. The API handles appointment management, user authentication, and branch management, while the web application allows users to interact with the system to book and manage appointments.
 
+## Application Overview
+
+The appointment scheduling application includes a predefined set of data for locations, users, and roles, allowing for an effective initial setup of the system. In the API, you can see the creation of users and the assignment of roles, highlighting two main roles: **User** and **Admin**. A user with the **User** role can create up to five appointments per day and can only view their own scheduled appointments. On the other hand, a user with the **Admin** role has full access to view all appointments of all users and make necessary modifications. The application implements a robust authentication and authorization system using JWT to ensure secure access and data management.
 
 ## Solution Structure
 
