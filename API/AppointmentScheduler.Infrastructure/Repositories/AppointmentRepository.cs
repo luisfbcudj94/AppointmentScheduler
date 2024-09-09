@@ -21,12 +21,16 @@ namespace AppointmentScheduler.Infrastructure.Repositories
 
         public async Task<Appointment> GetByIdAsync(Guid id)
         {
-            return await _context.Appointments.FindAsync(id);
+            return await _context.Appointments
+                                .Include(a => a.Location)
+                                .FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<IEnumerable<Appointment>> GetAllAsync()
         {
-            return await _context.Appointments.ToListAsync();
+            return await _context.Appointments
+                                 .Include(a => a.Location)
+                                 .ToListAsync();
         }
 
         public async Task CreateAsync(Appointment appointment)

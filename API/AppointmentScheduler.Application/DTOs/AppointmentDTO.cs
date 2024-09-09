@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppointmentScheduler.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace AppointmentScheduler.Application.DTOs
         public string Cedula { get; set; }
         public DateTime AppointmentDate { get; set; }
         public Guid LocationId { get; set; }
+        public LocationDTO Location { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ActivatedAt { get; set; }
