@@ -10,3 +10,14 @@ mat-card {
     margin-right: 8px;
   }
   
+mat-card-header{
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+mat-card-header mat-card-title{
+  color: blue;
+  font-weight: 500;
+  font-size: 24px;
+}

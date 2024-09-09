@@ -1,9 +1,12 @@
 <mat-card>
-<mat-card-header>
-  <mat-card-title>Appointment Details</mat-card-title>
-  <button mat-icon-button (click)="close()" style="position: absolute; right: 0;">
+<mat-card-header style="display: flex;align-items: center;">
+  <button mat-icon-button (click)="close()" style="position: absolute; right: 0;color: red;background-color: white;">
     <mat-icon>close</mat-icon>
   </button>
+  <mat-card-title>
+    Appointment Details
+
+  </mat-card-title>
 </mat-card-header>
 <mat-card-content>
   <div *ngIf="appointment">

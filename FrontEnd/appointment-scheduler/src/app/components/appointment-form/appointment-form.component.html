@@ -1,7 +1,7 @@
 <mat-card>
-  <mat-card-header>
+  <mat-card-header style="display: flex;align-items: center;">
     <mat-card-title>{{ isEdit ? 'Edit Appointment' : 'Create Appointment' }}</mat-card-title>
-    <button mat-icon-button (click)="close()" style="position: absolute; right: 0;">
+    <button mat-icon-button (click)="close()" style="position: absolute; right: 0;color: red;background-color: white;">
       <mat-icon>close</mat-icon>
     </button>
   </mat-card-header>

@@ -94,6 +94,7 @@ export class AppointmentFormComponent implements OnInit {
             this.appointment.location = data;
             this.appointmentService.updateAppointment(this.appointment.id, this.appointment).subscribe(() => {
               this.dialogRef.close(true);
+              window.location.reload();
             }, error => console.error(error));
           },
           error => console.error('Error fetching locations:', error)
@@ -104,6 +105,7 @@ export class AppointmentFormComponent implements OnInit {
 
         this.appointmentService.updateAppointment(this.appointment.id, this.appointment).subscribe(() => {
           this.dialogRef.close(true);
+          window.location.reload();
         }, error => console.error(error));
       }
 

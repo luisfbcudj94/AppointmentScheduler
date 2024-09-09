@@ -71,6 +71,7 @@ export class AppointmentListComponent implements OnInit {
   deleteAppointment(id: string): void {
     this.appointmentService.deleteAppointment(id).subscribe(() => {
       this.loadAppointments();
+      window.location.reload();
     }, error => console.error(error));
   }
 }
