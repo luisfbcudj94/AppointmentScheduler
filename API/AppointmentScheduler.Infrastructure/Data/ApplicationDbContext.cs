@@ -34,7 +34,12 @@ namespace AppointmentScheduler.Infrastructure.Data
                 new User { Id = Guid.NewGuid(), Name = "Jose Eugenio Rodriguez", Cedula = "9396795", RoleId = userRoleId },
                 new User { Id = Guid.NewGuid(), Name = "Marta Alejandra Soacha", Cedula = "47438962", RoleId = userRoleId },
                 new User { Id = Guid.NewGuid(), Name = "Elkin Dario Sanchez", Cedula = "987654321", RoleId = adminRoleId }
-            ); ;
+            );
+
+            modelBuilder.Entity<Location>().HasData(
+                new Location { Id = Guid.NewGuid(), Name = "Bancolombia sucursal centro", Address = "Avenida la playa edificio colteger piso 17"},
+                new Location { Id = Guid.NewGuid(), Name = "Bancolombia sucursal mayorca", Address = "Centro comercial mayorca local 102"}
+            );
         }
     }
 }
