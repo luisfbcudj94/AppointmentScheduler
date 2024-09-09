@@ -9,6 +9,6 @@ namespace AppointmentScheduler.Domain.Models
     public class Role
     {
         public Guid Id { get; set; }
-        public Guid Name { get; set; }
+        public string Name { get; set; }
     }
 }
