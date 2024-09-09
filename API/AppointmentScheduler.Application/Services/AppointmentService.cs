@@ -36,17 +36,39 @@ namespace AppointmentScheduler.Application.Services
 
         public async Task CreateAsync(CreateAppointmentDTO appointmentDto)
         {
+            var now = DateTime.UtcNow;
+            var maxDate = now.AddDays(3);
+
+            var appointmentDate = appointmentDto.AppointmentDate;
+
+            if (appointmentDate < now || appointmentDate > maxDate)
+            {
+                throw new ArgumentException($"Appointment date must be between {now:yyyy-MM-dd} and {maxDate:yyyy-MM-dd}.");
+            }
+
             appointmentDto.Id = Guid.NewGuid();
             appointmentDto.IsActive = false;
             var appointment = _mapper.Map<Appointment>(appointmentDto);
             await _appointmentRepository.CreateAsync(appointment);
         }
 
+
         public async Task UpdateAsync(AppointmentDTO appointmentDto)
         {
+            var now = DateTime.UtcNow;
+            var maxDate = now.AddDays(3);
+
+            var appointmentDate = appointmentDto.AppointmentDate;
+
+            if (appointmentDate < now || appointmentDate > maxDate)
+            {
+                throw new ArgumentException($"Appointment date must be between {now:yyyy-MM-dd} and {maxDate:yyyy-MM-dd}.");
+            }
+
             var appointment = _mapper.Map<Appointment>(appointmentDto);
             await _appointmentRepository.UpdateAsync(appointment);
         }
+
 
         public async Task DeleteAsync(Guid id)
         {
