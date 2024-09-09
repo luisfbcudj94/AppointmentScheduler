@@ -9,7 +9,8 @@ namespace AppointmentScheduler.Domain.Models
     public class Appointment
     {
         public Guid Id { get; set; }
-        public string Cedula { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
         public DateTime AppointmentDate { get; set; }
         public Guid LocationId { get; set; }
         public Location Location { get; set; }
