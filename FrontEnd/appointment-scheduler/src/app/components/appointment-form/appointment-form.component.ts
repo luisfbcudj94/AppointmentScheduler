@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Location } from '../../models/location';
 import { Appointment } from '../../models/appointment';
 import { MatSelectModule } from '@angular/material/select';
+import { dateRangeValidator } from '../../helpers/validador-fecha';
 
 @Component({
   selector: 'app-appointment-form',
@@ -44,7 +45,7 @@ export class AppointmentFormComponent implements OnInit {
   ) {
     this.appointmentForm = this.fb.group({
       locationId: ['', Validators.required],
-      date: ['', Validators.required],
+      date: ['', [Validators.required, dateRangeValidator()]],
       appointmentId: [''],
       userId: [localStorage.getItem('userId') || '']
     });
@@ -80,6 +81,10 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+
+    if (this.appointmentForm.invalid) {
+      return;
+    }
 
     this.appointment.locationId = this.appointmentForm.value.locationId;
     this.appointment.appointmentDate = this.appointmentForm.value.date;
