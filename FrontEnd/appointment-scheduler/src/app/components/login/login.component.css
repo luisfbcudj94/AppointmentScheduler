@@ -1,0 +1,25 @@
+mat-card {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+  
+mat-card-title {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+mat-card-content form{
+    display: flex;
+    flex-direction: column;
+}
+  
+mat-card-content form button{
+    margin-top: 26px;
+}
+  
