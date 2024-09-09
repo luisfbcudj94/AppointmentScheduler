@@ -6,6 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { DatePipe } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { AppointmentFormComponent } from '../appointment-form/appointment-form.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-appointment-detail',
@@ -13,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   templateUrl: './appointment-details.component.html',
   styleUrls: ['./appointment-details.component.css'],
@@ -28,7 +32,8 @@ export class AppointmentDetailComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
     public dialogRef: MatDialogRef<AppointmentDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +49,16 @@ export class AppointmentDetailComponent implements OnInit {
 
   editAppointment(): void {
     this.dialogRef.close();
-    this.router.navigate([`/appointments/edit/${this.appointment.id}`]);
+    const dialogRef = this.dialog.open(AppointmentFormComponent, {
+      width: '600px',
+      data: { id: this.appointment.id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Dialog closed with success');
+      }
+    });
   }
 
   close(): void {

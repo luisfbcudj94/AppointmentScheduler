@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from '../../services/appointment.service';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-appointment-form',
@@ -19,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ]
 })
 export class AppointmentFormComponent implements OnInit {
@@ -29,8 +31,8 @@ export class AppointmentFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService,
-    private route: ActivatedRoute,
-    private router: Router
+    public dialogRef: MatDialogRef<AppointmentFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.appointmentForm = this.fb.group({
       location: ['', Validators.required],
@@ -39,10 +41,9 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    if (id) {
+    if (this.data && this.data.id) {
       this.isEdit = true;
-      this.appointmentService.getAppointment(id).subscribe(
+      this.appointmentService.getAppointment(this.data.id).subscribe(
         data => this.appointmentForm.patchValue(data),
         error => console.error(error)
       );
@@ -52,12 +53,16 @@ export class AppointmentFormComponent implements OnInit {
   onSubmit(): void {
     if (this.isEdit) {
       this.appointmentService.updateAppointment(this.appointmentForm.value.id, this.appointmentForm.value).subscribe(() => {
-        this.router.navigate(['/appointments']);
+        this.dialogRef.close(true);
       }, error => console.error(error));
     } else {
       this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(() => {
-        this.router.navigate(['/appointments']);
+        this.dialogRef.close(true);
       }, error => console.error(error));
     }
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 }

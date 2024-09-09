@@ -1,6 +1,9 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{ isEdit ? 'Edit Appointment' : 'Create Appointment' }}</mat-card-title>
+    <button mat-icon-button (click)="close()" style="position: absolute; right: 0;">
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
