@@ -1,9 +1,11 @@
 ﻿using AppointmentScheduler.Application.DTOs;
 using AppointmentScheduler.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppointmentScheduler.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AppointmentController : ControllerBase

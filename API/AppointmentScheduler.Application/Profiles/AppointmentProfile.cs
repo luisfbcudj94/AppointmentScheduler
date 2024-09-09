@@ -21,6 +21,13 @@ namespace AppointmentScheduler.Application.Profiles
 
             CreateMap<Location, LocationDTO>()
                 .ReverseMap();
+
+            CreateMap<User, UserDTO>()
+            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role))
+            .ReverseMap();
+
+            CreateMap<Role, RoleDTO>()
+                .ReverseMap();
         }
     }
 }
