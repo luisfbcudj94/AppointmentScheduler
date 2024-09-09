@@ -1,5 +1,6 @@
 ﻿using AppointmentScheduler.Application.DTOs;
 using AppointmentScheduler.Application.Services.Interfaces;
+using AppointmentScheduler.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +54,28 @@ namespace AppointmentScheduler.API.Controllers
         {
             await _appointmentService.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpPost("{appointmentId}/activate")]
+        public async Task<IActionResult> Activate(Guid appointmentId)
+        {
+            try
+            {
+                var result = await _appointmentService.ActivateAsync(appointmentId);
+                if (result)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest("Appointment cannot be activated. It is too late.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

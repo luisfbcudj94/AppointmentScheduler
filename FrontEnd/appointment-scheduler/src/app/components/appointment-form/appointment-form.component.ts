@@ -111,7 +111,7 @@ export class AppointmentFormComponent implements OnInit {
 
     } else {
 
-      this.appointment.isActive = true;
+      this.appointment.isActive = false;
       this.appointment.createdAt = new Date().toISOString().slice(0, 16);
       this.appointment.activatedAt = new Date().toISOString().slice(0, 16);
 

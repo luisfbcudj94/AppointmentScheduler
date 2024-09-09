@@ -14,5 +14,6 @@ namespace AppointmentScheduler.Application.Services.Interfaces
         Task CreateAsync(CreateAppointmentDTO appointmentDto);
         Task UpdateAsync(AppointmentDTO appointmentDto);
         Task DeleteAsync(Guid id);
+        Task<bool> ActivateAsync(Guid appointmentId);
     }
 }

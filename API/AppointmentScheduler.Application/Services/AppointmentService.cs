@@ -37,6 +37,7 @@ namespace AppointmentScheduler.Application.Services
         public async Task CreateAsync(CreateAppointmentDTO appointmentDto)
         {
             appointmentDto.Id = Guid.NewGuid();
+            appointmentDto.IsActive = false;
             var appointment = _mapper.Map<Appointment>(appointmentDto);
             await _appointmentRepository.CreateAsync(appointment);
         }
@@ -50,6 +51,27 @@ namespace AppointmentScheduler.Application.Services
         public async Task DeleteAsync(Guid id)
         {
             await _appointmentRepository.DeleteAsync(id);
+        }
+
+        public async Task<bool> ActivateAsync(Guid id)
+        {
+            var appointment = await _appointmentRepository.GetByIdAsync(id);
+            if (appointment == null)
+            {
+                throw new ArgumentException("Appointment not found");
+            }
+
+            var now = DateTime.UtcNow;
+            var fifteenMinutesBefore = appointment.AppointmentDate.AddMinutes(-15);
+
+            if (now > fifteenMinutesBefore)
+            {
+                return false;
+            }
+
+            appointment.IsActive = true;
+            await _appointmentRepository.UpdateAsync(appointment);
+            return true;
         }
     }
 }
