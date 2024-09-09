@@ -10,8 +10,11 @@ export class LocationService {
 
   constructor(private http: HttpClient) { }
 
-
   getLocations(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/Location`);
+  }
+
+  getLocation(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/Location/${id}`);
   }
 }

@@ -44,17 +44,16 @@ export class AppointmentFormComponent implements OnInit {
   ) {
     this.appointmentForm = this.fb.group({
       locationId: ['', Validators.required],
-      date: ['', Validators.required]
+      date: ['', Validators.required],
+      appointmentId: ['']
     });
   }
 
   ngOnInit(): void {
-    console.log("data in edit form: ",this.data)
     if (this.data && this.data.id) {
 
       this.locationService.getLocations().subscribe(
         data => {
-          console.log('Locations data received:', data);
           this.locations = data;
         },
         error => console.error('Error fetching locations:', error)
@@ -64,11 +63,12 @@ export class AppointmentFormComponent implements OnInit {
 
       this.appointmentService.getAppointment(this.data.id).subscribe(
         data => {
-          console.log('Data received:', data);
+          this.appointment = data;
           const formattedDate = new Date(data.appointmentDate).toISOString().slice(0, 16);
           this.appointmentForm.patchValue({
             locationId: data.locationId,
-            date: formattedDate
+            date: formattedDate,
+            appointmentId: data.id
           });
         },
         error => console.error('Error fetching appointment:', error)
@@ -78,13 +78,37 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+
     if (this.isEdit) {
-      this.appointmentService.updateAppointment(this.appointmentForm.value.id, this.appointmentForm.value).subscribe(() => {
-        this.dialogRef.close(true);
-      }, error => console.error(error));
+
+      this.appointment.locationId = this.appointmentForm.value.locationId;
+      this.appointment.appointmentDate = this.appointmentForm.value.date;
+
+      if (this.appointment.locationId != this.appointment.location.id){
+
+        this.locationService.getLocation(this.appointment.locationId).subscribe(
+          data => {
+            this.appointment.location = data;
+            this.appointmentService.updateAppointment(this.appointment.id, this.appointment).subscribe(() => {
+              this.dialogRef.close(true);
+              window.location.reload()
+            }, error => console.error(error));
+          },
+          error => console.error('Error fetching locations:', error)
+        );
+
+      }
+      else{
+        this.appointmentService.updateAppointment(this.appointment.id, this.appointment).subscribe(() => {
+          this.dialogRef.close(true);
+          window.location.reload()
+        }, error => console.error(error));
+      }
+
     } else {
       this.appointmentService.createAppointment(this.appointmentForm.value).subscribe(() => {
         this.dialogRef.close(true);
+        window.location.reload()
       }, error => console.error(error));
     }
   }

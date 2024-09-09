@@ -1,8 +1,11 @@
+import { Location } from './location';
+
 export interface Appointment {
     id: string;
     locationId: string;
     customerId: string;
-    appointmentTime: string;
+    appointmentDate: string;
     status: string;
+    location: Location;
   }
   
