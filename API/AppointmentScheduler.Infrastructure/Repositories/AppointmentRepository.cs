@@ -72,5 +72,14 @@ namespace AppointmentScheduler.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<bool> HasFiveOrMoreAppointmentsOnSameDateAsync(Guid userId, DateTime date)
+        {
+            var count = await _context.Appointments
+                .Where(a => a.UserId == userId && a.AppointmentDate.Date == date.Date)
+                .CountAsync();
+
+            return count >= 5;
+        }
     }
 }

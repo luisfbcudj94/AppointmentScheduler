@@ -14,5 +14,6 @@ namespace AppointmentScheduler.Infrastructure.Repositories.Interfaces
         Task CreateAsync(Appointment appointment);
         Task UpdateAsync(Appointment appointment);
         Task DeleteAsync(Guid id);
+        Task<bool> HasFiveOrMoreAppointmentsOnSameDateAsync(Guid userId, DateTime date)
     }
 }

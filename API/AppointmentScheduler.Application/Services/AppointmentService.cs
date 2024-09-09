@@ -46,6 +46,12 @@ namespace AppointmentScheduler.Application.Services
                 throw new ArgumentException($"Appointment date must be between {now:yyyy-MM-dd} and {maxDate:yyyy-MM-dd}.");
             }
 
+            var hasFiveOrMore = await _appointmentRepository.HasFiveOrMoreAppointmentsOnSameDateAsync(appointmentDto.UserId, appointmentDate);
+            if (hasFiveOrMore)
+            {
+                throw new ArgumentException("User already has 5 or more appointments on the same date.");
+            }
+
             appointmentDto.Id = Guid.NewGuid();
             appointmentDto.IsActive = false;
             var appointment = _mapper.Map<Appointment>(appointmentDto);
