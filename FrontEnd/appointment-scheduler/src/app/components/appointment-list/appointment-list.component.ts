@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../services/appointment.service';
+import { AppointmentDetailComponent } from '../appointment-details/appointment-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-appointment-list',
@@ -22,7 +24,10 @@ export class AppointmentListComponent implements OnInit {
   appointments: any[] = [];
   displayedColumns: string[] = ['id', 'location', 'date', 'actions'];
 
-  constructor(private appointmentService: AppointmentService, private router: Router) { }
+  constructor(
+    private appointmentService: AppointmentService, 
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadAppointments();
@@ -38,11 +43,18 @@ export class AppointmentListComponent implements OnInit {
     );
   }
 
-  viewAppointment(id: number): void {
-    this.router.navigate([`/appointments/${id}`]);
+  viewAppointment(id: string): void {
+    const dialogRef = this.dialog.open(AppointmentDetailComponent, {
+      width: '600px',
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  deleteAppointment(id: number): void {
+  deleteAppointment(id: string): void {
     this.appointmentService.deleteAppointment(id).subscribe(() => {
       this.loadAppointments();
     }, error => console.error(error));
