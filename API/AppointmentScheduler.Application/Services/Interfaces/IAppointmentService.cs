@@ -11,7 +11,7 @@ namespace AppointmentScheduler.Application.Services.Interfaces
     {
         Task<AppointmentDTO> GetByIdAsync(Guid id);
         Task<IEnumerable<AppointmentDTO>> GetAllAsync();
-        Task CreateAsync(AppointmentDTO appointmentDto);
+        Task CreateAsync(CreateAppointmentDTO appointmentDto);
         Task UpdateAsync(AppointmentDTO appointmentDto);
         Task DeleteAsync(Guid id);
     }

@@ -31,7 +31,7 @@ namespace AppointmentScheduler.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AppointmentDTO appointmentDto)
+        public async Task<IActionResult> Create([FromBody] CreateAppointmentDTO appointmentDto)
         {
             await _appointmentService.CreateAsync(appointmentDto);
             return CreatedAtAction(nameof(Get), new { id = appointmentDto.Id }, appointmentDto);

@@ -7,6 +7,7 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+      
       <mat-form-field appearance="fill">
         <mat-label>Location</mat-label>
         <mat-select formControlName="locationId" required>
@@ -19,6 +20,11 @@
       <mat-form-field appearance="fill">
         <mat-label>Date</mat-label>
         <input matInput formControlName="date" type="datetime-local" required>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="!isEdit" appearance="fill">
+        <mat-label>Customer ID</mat-label>
+        <input matInput formControlName="cedula" required>
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit">{{ isEdit ? 'Update' : 'Create' }}</button>

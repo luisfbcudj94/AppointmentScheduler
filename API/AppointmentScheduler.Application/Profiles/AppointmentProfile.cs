@@ -16,6 +16,9 @@ namespace AppointmentScheduler.Application.Profiles
             CreateMap<Appointment, AppointmentDTO>()
                 .ReverseMap();
 
+            CreateMap<Appointment, CreateAppointmentDTO>()
+                .ReverseMap();
+
             CreateMap<Location, LocationDTO>()
                 .ReverseMap();
         }

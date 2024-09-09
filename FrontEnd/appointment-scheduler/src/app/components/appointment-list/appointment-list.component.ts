@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../services/appointment.service';
 import { AppointmentDetailComponent } from '../appointment-details/appointment-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AppointmentFormComponent } from '../appointment-form/appointment-form.component';
 
 @Component({
   selector: 'app-appointment-list',
@@ -37,10 +38,20 @@ export class AppointmentListComponent implements OnInit {
     this.appointmentService.getAppointments().subscribe(
       (data: any[]) => {
         this.appointments = data;
-        console.log('Data received:', data);
       },
       error => console.error('Error:', error)
     );
+  }
+
+  createAppointment(): void {
+    const dialogRef = this.dialog.open(AppointmentFormComponent, {
+      width: '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadAppointments();
+    });
   }
 
   viewAppointment(id: string): void {
@@ -51,6 +62,7 @@ export class AppointmentListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.loadAppointments()
     });
   }
 

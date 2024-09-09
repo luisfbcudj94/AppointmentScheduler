@@ -34,8 +34,9 @@ namespace AppointmentScheduler.Application.Services
             return _mapper.Map<IEnumerable<AppointmentDTO>>(appointments);
         }
 
-        public async Task CreateAsync(AppointmentDTO appointmentDto)
+        public async Task CreateAsync(CreateAppointmentDTO appointmentDto)
         {
+            appointmentDto.Id = Guid.NewGuid();
             var appointment = _mapper.Map<Appointment>(appointmentDto);
             await _appointmentRepository.CreateAsync(appointment);
         }
