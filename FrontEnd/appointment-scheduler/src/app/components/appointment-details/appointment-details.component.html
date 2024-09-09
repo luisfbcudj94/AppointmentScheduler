@@ -7,8 +7,10 @@
 </mat-card-header>
 <mat-card-content>
   <div *ngIf="appointment">
-    <p><strong>Cedula:</strong> {{ appointment.cedula }}</p>
+    <p><strong>Customer name:</strong> {{ appointment.user.name }}</p>
+    <p><strong>Customer cedula:</strong> {{ appointment.user.cedula }}</p>
     <p><strong>Location:</strong> {{ appointment.location.name }}</p>
+    <p><strong>Address:</strong> {{ appointment.location.address }}</p>
     <p><strong>Appointment Date:</strong> {{ appointment.appointmentDate | date:'MMMM d, yyyy HH:mm:ss' }}</p>
     <p><strong>Active:</strong> {{ appointment.isActive ? 'Yes' : 'No' }}</p>
     <p><strong>CreatedAt:</strong> {{ appointment.createdAt | date:'MMMM d, yyyy HH:mm:ss'}}</p>

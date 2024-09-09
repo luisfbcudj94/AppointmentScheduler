@@ -24,7 +24,7 @@
 
       <mat-form-field *ngIf="!isEdit" appearance="fill">
         <mat-label>Customer ID</mat-label>
-        <input matInput formControlName="cedula" required>
+        <input matInput formControlName="userId" required readonly>
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit">{{ isEdit ? 'Update' : 'Create' }}</button>

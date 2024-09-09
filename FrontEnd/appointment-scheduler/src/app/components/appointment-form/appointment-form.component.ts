@@ -46,7 +46,7 @@ export class AppointmentFormComponent implements OnInit {
       locationId: ['', Validators.required],
       date: ['', Validators.required],
       appointmentId: [''],
-      cedula: ['']
+      userId: [localStorage.getItem('userId') || '']
     });
   }
 
@@ -83,7 +83,7 @@ export class AppointmentFormComponent implements OnInit {
 
     this.appointment.locationId = this.appointmentForm.value.locationId;
     this.appointment.appointmentDate = this.appointmentForm.value.date;
-    this.appointment.cedula = this.appointmentForm.value.cedula;
+    this.appointment.userId = localStorage.getItem('userId') || '';
 
     if (this.isEdit) {
 

@@ -23,6 +23,8 @@ namespace AppointmentScheduler.Infrastructure.Repositories
         {
             return await _context.Appointments
                                 .Include(a => a.Location)
+                                .Include(u => u.User)
+                                    .ThenInclude(r => r.Role)
                                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
@@ -30,6 +32,8 @@ namespace AppointmentScheduler.Infrastructure.Repositories
         {
             return await _context.Appointments
                                  .Include(a => a.Location)
+                                 .Include(u => u.User)
+                                    .ThenInclude(r => r.Role)
                                  .ToListAsync();
         }
 

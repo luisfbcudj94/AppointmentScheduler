@@ -9,7 +9,7 @@ namespace AppointmentScheduler.Application.DTOs
     public class CreateAppointmentDTO
     {
         public Guid? Id { get; set; }
-        public string Cedula { get; set; }
+        public Guid UserId { get; set; }
         public DateTime AppointmentDate { get; set; }
         public Guid LocationId { get; set; }
         public bool IsActive { get; set; }

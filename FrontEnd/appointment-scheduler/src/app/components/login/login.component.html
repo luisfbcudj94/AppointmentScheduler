@@ -6,7 +6,7 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>ID Number</mat-label>
-          <input matInput formControlName="cedula" placeholder="Enter your ID number" />
+          <input matInput formControlName="cedula" placeholder="Enter your ID number"/>
           <mat-error *ngIf="loginForm.controls['cedula'].hasError('required')">
             ID number is required.
           </mat-error>

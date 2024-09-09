@@ -32,7 +32,7 @@ namespace AppointmentScheduler.API.Controllers
             if (user != null)
             {
                 var token = GenerateJwtToken(request.Cedula);
-                return Ok(new { Token = token });
+                return Ok(new { Token = token, UserId = user.Id });
             }
 
             return Unauthorized();
