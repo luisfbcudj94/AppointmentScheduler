@@ -1,0 +1,12 @@
+mat-card {
+    margin: 20px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  button {
+    margin-right: 8px;
+  }
+  

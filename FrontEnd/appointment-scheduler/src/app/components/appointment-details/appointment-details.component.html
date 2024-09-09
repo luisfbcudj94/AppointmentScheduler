@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Appointment Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="appointment">
+        <p><strong>ID:</strong> {{ appointment.id }}</p>
+        <p><strong>Location:</strong> {{ appointment.location.name }}</p>
+        <p><strong>Date:</strong> {{ appointment.appointmentDate | date:'MMMM d, yyyy HH:mm:ss' }}</p>
+        <button mat-raised-button color="primary" (click)="editAppointment()">Edit</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
