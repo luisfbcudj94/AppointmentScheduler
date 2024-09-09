@@ -10,5 +10,6 @@ namespace AppointmentScheduler.Infrastructure.Repositories.Interfaces
     public interface IUserRepository
     {
         Task<User> ValidateUser(string cedula);
+        Task<User> GetUserById(Guid userId);
     }
 }

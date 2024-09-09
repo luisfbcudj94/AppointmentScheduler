@@ -28,9 +28,9 @@ namespace AppointmentScheduler.Application.Services
             return _mapper.Map<AppointmentDTO>(appointment);
         }
 
-        public async Task<IEnumerable<AppointmentDTO>> GetAllAsync()
+        public async Task<IEnumerable<AppointmentDTO>> GetAllAsync(Guid userId)
         {
-            var appointments = await _appointmentRepository.GetAllAsync();
+            var appointments = await _appointmentRepository.GetAllAsync(userId);
             return _mapper.Map<IEnumerable<AppointmentDTO>>(appointments);
         }
 

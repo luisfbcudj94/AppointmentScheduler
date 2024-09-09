@@ -24,6 +24,7 @@ import { AppointmentFormComponent } from '../appointment-form/appointment-form.c
 export class AppointmentListComponent implements OnInit {
   appointments: any[] = [];
   displayedColumns: string[] = ['id', 'location', 'date', 'actions'];
+  userId: string = localStorage.getItem('userId') || '';
 
   constructor(
     private appointmentService: AppointmentService, 
@@ -35,7 +36,8 @@ export class AppointmentListComponent implements OnInit {
   }
 
   loadAppointments(): void {
-    this.appointmentService.getAppointments().subscribe(
+
+    this.appointmentService.getAppointments(this.userId).subscribe(
       (data: any[]) => {
         this.appointments = data;
       },

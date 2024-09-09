@@ -25,5 +25,12 @@ namespace AppointmentScheduler.Infrastructure.Repositories
                                 .Include(a => a.Role)
                                 .FirstOrDefaultAsync(a => a.Cedula == cedula);
         }
+
+        public async Task<User> GetUserById(Guid userId)
+        {
+            return await _context.Users
+                                .Include(a => a.Role)
+                                .FirstOrDefaultAsync(a => a.Id == userId);
+        }
     }
 }

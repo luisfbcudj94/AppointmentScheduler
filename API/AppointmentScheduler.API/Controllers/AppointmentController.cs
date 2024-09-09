@@ -26,9 +26,10 @@ namespace AppointmentScheduler.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppointmentDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<AppointmentDTO>>> GetAll(
+            [FromQuery] Guid userId)
         {
-            var appointments = await _appointmentService.GetAllAsync();
+            var appointments = await _appointmentService.GetAllAsync(userId);
             return Ok(appointments);
         }
 

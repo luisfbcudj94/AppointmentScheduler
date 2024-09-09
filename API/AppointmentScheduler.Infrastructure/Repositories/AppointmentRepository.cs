@@ -13,10 +13,14 @@ namespace AppointmentScheduler.Infrastructure.Repositories
     public class AppointmentRepository: IAppointmentRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public AppointmentRepository(ApplicationDbContext context)
+        public AppointmentRepository(
+            ApplicationDbContext context,
+            IUserRepository userRepository)
         {
             _context = context;
+            _userRepository = userRepository;
         }
 
         public async Task<Appointment> GetByIdAsync(Guid id)
@@ -28,14 +32,24 @@ namespace AppointmentScheduler.Infrastructure.Repositories
                                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<IEnumerable<Appointment>> GetAllAsync()
+        public async Task<IEnumerable<Appointment>> GetAllAsync(Guid userId)
         {
-            return await _context.Appointments
-                                 .Include(a => a.Location)
-                                 .Include(u => u.User)
-                                    .ThenInclude(r => r.Role)
-                                 .ToListAsync();
+            var user = await _userRepository.GetUserById(userId);
+
+            var query = _context.Appointments
+                .Include(a => a.Location)
+                .Include(u => u.User)
+                    .ThenInclude(r => r.Role)
+                .AsQueryable();
+
+            if (user.Role.Name != "Admin")
+            {
+                query = query.Where(a => a.UserId == userId);
+            }
+
+            return await query.ToListAsync();
         }
+
 
         public async Task CreateAsync(Appointment appointment)
         {

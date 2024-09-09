@@ -29,8 +29,8 @@ export class AppointmentService {
     return headers;
   }
 
-  getAppointments(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/Appointment`, { headers: this.getHeaders() })
+  getAppointments(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/Appointment?userId=${userId}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError.bind(this)));
   }
 

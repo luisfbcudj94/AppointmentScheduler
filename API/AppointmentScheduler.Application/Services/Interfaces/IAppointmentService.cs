@@ -10,7 +10,7 @@ namespace AppointmentScheduler.Application.Services.Interfaces
     public interface IAppointmentService
     {
         Task<AppointmentDTO> GetByIdAsync(Guid id);
-        Task<IEnumerable<AppointmentDTO>> GetAllAsync();
+        Task<IEnumerable<AppointmentDTO>> GetAllAsync(Guid userId);
         Task CreateAsync(CreateAppointmentDTO appointmentDto);
         Task UpdateAsync(AppointmentDTO appointmentDto);
         Task DeleteAsync(Guid id);
